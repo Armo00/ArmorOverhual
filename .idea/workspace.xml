@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2512b0f7-27dc-4e2d-8f20-d3160ebe90bc" name="Default Changelist" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/Mods/NTCP/test" afterDir="false" />
+    <list default="true" id="2512b0f7-27dc-4e2d-8f20-d3160ebe90bc" name="Default Changelist" comment="VS">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,7 +10,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1qqThGK4mwa3AlUP4l30CB4tWrj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -56,16 +62,50 @@
       <option name="project" value="LOCAL" />
       <updated>1654352046909</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="test">
+      <created>1654352158123</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1654352158123</updated>
+    </task>
+    <task id="LOCAL-00003" summary="删除内容">
+      <created>1654352310603</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1654352310603</updated>
+    </task>
+    <task id="LOCAL-00004" summary="VS">
+      <created>1654352380878</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1654352380878</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.cfg" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="删除NTCP部分文件夹" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="test" />
+    <MESSAGE value="删除内容" />
+    <MESSAGE value="VS" />
+    <option name="LAST_COMMIT_MESSAGE" value="VS" />
   </component>
   <component name="WindowStateProjectService">
     <state x="319" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1651935035881">
@@ -89,6 +129,14 @@
       <screen x="0" y="0" width="1707" height="1027" />
     </state>
     <state x="353" y="164" key="SettingsEditor/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654351800954" />
+    <state x="444" y="253" key="Vcs.Push.Dialog.v2" timestamp="1654352515262">
+      <screen x="0" y="0" width="1707" height="1027" />
+    </state>
+    <state x="444" y="253" key="Vcs.Push.Dialog.v2/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654352515262" />
+    <state x="649" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1654352219634">
+      <screen x="0" y="0" width="1707" height="1027" />
+    </state>
+    <state x="649" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654352219634" />
     <state x="513" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1653119435719">
       <screen x="0" y="0" width="1707" height="1027" />
     </state>
