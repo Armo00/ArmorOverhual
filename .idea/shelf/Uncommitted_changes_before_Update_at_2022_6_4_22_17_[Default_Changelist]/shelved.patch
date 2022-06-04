@@ -1,0 +1,74 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"2512b0f7-27dc-4e2d-8f20-d3160ebe90bc\" name=\"Default Changelist\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1qqThGK4mwa3AlUP4l30CB4tWrj\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"ignore.virus.scanning.warn.message\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/Mods/Waterfall/Novapunch\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\KSP\\KSP_1.12.3\\TestRun\\GameData\\ArmorOverhual\\Mods\\NovaPunch\\Freyja\" />\r\n      <recent name=\"D:\\KSP\\KSP_1.12.3\\TestRun\\GameData\\ArmorOverhual\\Mods\\NovaPunch\\Freyja Trunk\" />\r\n    </key>\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\KSP\\KSP_1.12.3\\MODTestEnvironment\\GameData\\ArmorOverhual\\Mods\\Waterfall\\Novapunch\" />\r\n      <recent name=\"D:\\KSP\\KSP_1.12.3\\MODTestEnvironment\\GameData\\ArmorOverhual\\Mods\\ICSPConfig\\RealFuels\" />\r\n      <recent name=\"D:\\KSP\\KSP_1.12.3\\MODTestEnvironment\\GameData\\ArmorOverhual\\Mods\\Waterfall\\CST-100\" />\r\n      <recent name=\"D:\\KSP\\KSP_1.12.3\\MODTestEnvironment\\GameData\\ArmorOverhual\\Mods\\NF-Solar\" />\r\n      <recent name=\"D:\\KSP\\KSP_1.12.3\\MODTestEnvironment\\GameData\\ArmorOverhual\\Mods\\NF-LaunchVehicle\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"2512b0f7-27dc-4e2d-8f20-d3160ebe90bc\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1617806237498</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1617806237498</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"UnknownFeatures\">\r\n    <option featureType=\"com.intellij.fileTypeFactory\" implementationName=\"*.cfg\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"319\" y=\"178\" key=\"#com.intellij.execution.impl.EditConfigurationsDialog\" timestamp=\"1651935035881\">\r\n      <screen x=\"0\" y=\"0\" width=\"1707\" height=\"1027\" />\r\n    </state>\r\n    <state x=\"319\" y=\"178\" key=\"#com.intellij.execution.impl.EditConfigurationsDialog/-3840.-441.2560.1400/0.-2160.2560.1400/0.0.1707.1027@0.0.1707.1027\" timestamp=\"1651935035881\" />\r\n    <state x=\"597\" y=\"317\" key=\"#com.intellij.fileTypes.FileTypeChooser\" timestamp=\"1652898112363\">\r\n      <screen x=\"0\" y=\"0\" width=\"1707\" height=\"1027\" />\r\n    </state>\r\n    <state x=\"597\" y=\"317\" key=\"#com.intellij.fileTypes.FileTypeChooser/-3840.-441.2560.1400/0.-2160.2560.1400/0.0.1707.1027@0.0.1707.1027\" timestamp=\"1652898112363\" />\r\n    <state x=\"353\" y=\"164\" key=\"SettingsEditor\" timestamp=\"1654351800954\">\r\n      <screen x=\"0\" y=\"0\" width=\"1707\" height=\"1027\" />\r\n    </state>\r\n    <state x=\"353\" y=\"164\" key=\"SettingsEditor/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027\" timestamp=\"1654351800954\" />\r\n    <state x=\"513\" y=\"229\" width=\"672\" height=\"678\" key=\"search.everywhere.popup\" timestamp=\"1653119435719\">\r\n      <screen x=\"0\" y=\"0\" width=\"1707\" height=\"1027\" />\r\n    </state>\r\n    <state x=\"513\" y=\"229\" width=\"672\" height=\"678\" key=\"search.everywhere.popup/0.0.1707.1027/-3840.0.2560.1400/2560.0.1821.1325@0.0.1707.1027\" timestamp=\"1650459262457\" />\r\n    <state x=\"513\" y=\"229\" width=\"672\" height=\"678\" key=\"search.everywhere.popup/0.0.1707.1027/-3840.0.2560.1400@0.0.1707.1027\" timestamp=\"1651126598063\" />\r\n    <state x=\"513\" y=\"229\" width=\"672\" height=\"678\" key=\"search.everywhere.popup/0.0.1707.1027/-611.-2160.2560.1400/-2560.143.1707.1027@0.0.1707.1027\" timestamp=\"1650446892288\" />\r\n    <state x=\"513\" y=\"229\" width=\"672\" height=\"678\" key=\"search.everywhere.popup/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027\" timestamp=\"1653119435719\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 48adabbd9daa3a1067a9069f64401bef2c709ea7)
++++ .idea/workspace.xml	(date 1654352148163)
+@@ -1,13 +1,19 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="2512b0f7-27dc-4e2d-8f20-d3160ebe90bc" name="Default Changelist" comment="" />
++    <list default="true" id="2512b0f7-27dc-4e2d-8f20-d3160ebe90bc" name="Default Changelist" comment="Initial commit">
++      <change afterPath="$PROJECT_DIR$/Mods/NTCP/test" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="Git.Settings">
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="ProjectId" id="1qqThGK4mwa3AlUP4l30CB4tWrj" />
++  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+@@ -43,20 +49,42 @@
+       <option name="presentableId" value="Default" />
+       <updated>1617806237498</updated>
+     </task>
++    <task id="LOCAL-00001" summary="Initial commit">
++      <created>1654352046909</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1654352046909</updated>
++    </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="UnknownFeatures">
+     <option featureType="com.intellij.fileTypeFactory" implementationName="*.cfg" />
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="删除NTCP部分文件夹" />
++    <MESSAGE value="Initial commit" />
++    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+   </component>
+   <component name="WindowStateProjectService">
+     <state x="319" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1651935035881">
+       <screen x="0" y="0" width="1707" height="1027" />
+     </state>
+     <state x="319" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-3840.-441.2560.1400/0.-2160.2560.1400/0.0.1707.1027@0.0.1707.1027" timestamp="1651935035881" />
+-    <state x="597" y="317" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1652898112363">
++    <state x="597" y="317" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1654352135482">
+       <screen x="0" y="0" width="1707" height="1027" />
+     </state>
+     <state x="597" y="317" key="#com.intellij.fileTypes.FileTypeChooser/-3840.-441.2560.1400/0.-2160.2560.1400/0.0.1707.1027@0.0.1707.1027" timestamp="1652898112363" />
++    <state x="597" y="317" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654352135482" />
++    <state x="708" y="417" key="Github.ShareDialog" timestamp="1654351911122">
++      <screen x="0" y="0" width="1707" height="1027" />
++    </state>
++    <state x="708" y="417" key="Github.ShareDialog/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654351911121" />
++    <state x="570" y="217" key="Github.UntrackedFilesDialog" timestamp="1654351935737">
++      <screen x="0" y="0" width="1707" height="1027" />
++    </state>
++    <state x="570" y="217" key="Github.UntrackedFilesDialog/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654351935737" />
+     <state x="353" y="164" key="SettingsEditor" timestamp="1654351800954">
+       <screen x="0" y="0" width="1707" height="1027" />
+     </state>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2512b0f7-27dc-4e2d-8f20-d3160ebe90bc" name="Default Changelist" comment="VS">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2512b0f7-27dc-4e2d-8f20-d3160ebe90bc" name="Default Changelist" comment="删除gitignore" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +17,9 @@
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1qqThGK4mwa3AlUP4l30CB4tWrj" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -83,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654352380878</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="删除gitignore">
+      <created>1654352629074</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1654352629074</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -105,7 +112,8 @@
     <MESSAGE value="test" />
     <MESSAGE value="删除内容" />
     <MESSAGE value="VS" />
-    <option name="LAST_COMMIT_MESSAGE" value="VS" />
+    <MESSAGE value="删除gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除gitignore" />
   </component>
   <component name="WindowStateProjectService">
     <state x="319" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1651935035881">
@@ -129,14 +137,14 @@
       <screen x="0" y="0" width="1707" height="1027" />
     </state>
     <state x="353" y="164" key="SettingsEditor/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654351800954" />
-    <state x="444" y="253" key="Vcs.Push.Dialog.v2" timestamp="1654352515262">
+    <state x="444" y="253" key="Vcs.Push.Dialog.v2" timestamp="1654352638847">
       <screen x="0" y="0" width="1707" height="1027" />
     </state>
-    <state x="444" y="253" key="Vcs.Push.Dialog.v2/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654352515262" />
-    <state x="649" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1654352219634">
+    <state x="444" y="253" key="Vcs.Push.Dialog.v2/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654352638847" />
+    <state x="649" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1654352583048">
       <screen x="0" y="0" width="1707" height="1027" />
     </state>
-    <state x="649" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654352219634" />
+    <state x="649" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1654352583048" />
     <state x="513" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1653119435719">
       <screen x="0" y="0" width="1707" height="1027" />
     </state>
