@@ -72,7 +72,6 @@ CONTRACT_TYPE
     {
         name = AwardExperience
         type = AwardExperience
-        onState = CONTRACT_COMPLETED
         kerbal = @/trainee_list
         experience = @/expAward
     }
@@ -135,7 +134,7 @@ CONTRACT_TYPE
     {
         name = check_crew_count
         type = Expression
-        expression = @all_candidates.Count() > 1
+        expression = @/all_candidates.Count() > 1
         title = Must enough crew
     }
  

@@ -159,7 +159,7 @@ CONTRACT_TYPE
     {
         name = check_crew_count
         type = Expression
-        expression = @all_candidates.Count() > 2
+        expression = @/all_candidates.Count() > 2
         title = Must enough crew
     }
  
