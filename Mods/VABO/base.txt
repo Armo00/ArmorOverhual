@@ -35,3 +35,12 @@
         %organizerSubcategory = MethaloxEngines
     }
 }
+
+// Solid
+@PART[]:NEEDS[VABOrganizer]:Final
+{
+    %VABORGANIZER
+    {
+        %organizerSubcategory = solidEngines
+    }
+}
