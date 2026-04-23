@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2512b0f7-27dc-4e2d-8f20-d3160ebe90bc" name="Default Changelist" comment="删除gitignore" />
+    <list default="true" id="2512b0f7-27dc-4e2d-8f20-d3160ebe90bc" name="Default Changelist" comment="删除gitignore">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_6_4_22_17_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mods/CryoEngines/Methalox.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/Mods/CryoEngines/Methalox.cfg" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_D:/My Coding Project/ArmorOverhual" value="1qqThGK4mwa3AlUP4l30CB4tWrj" />
+    </persistenceIdMap>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -16,21 +24,28 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5,
+  "fromUser": false
+}]]></component>
   <component name="ProjectId" id="1qqThGK4mwa3AlUP4l30CB4tWrj" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <OptionsSetting value="false" id="Update" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Mods/Waterfall/Novapunch" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "master",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\KSP\KSP_1.12.3\TestRun\GameData\ArmorOverhual\Mods\NovaPunch\Freyja" />
@@ -44,6 +59,14 @@
       <recent name="D:\KSP\KSP_1.12.3\MODTestEnvironment\GameData\ArmorOverhual\Mods\NF-LaunchVehicle" />
     </key>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-3bd3a6803838-JavaScript-PY-261.22158.340" />
+        <option value="bundled-python-sdk-b63d5a1f7c97-b61e75351b1f-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.22158.340" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -54,6 +77,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617806237498</updated>
+      <workItem from="1776922381806" duration="20000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1654352046909</created>
@@ -92,6 +116,9 @@
     </task>
     <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.cfg" />
@@ -152,5 +179,13 @@
     <state x="513" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1707.1027/-3840.0.2560.1400@0.0.1707.1027" timestamp="1651126598063" />
     <state x="513" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1707.1027/-611.-2160.2560.1400/-2560.143.1707.1027@0.0.1707.1027" timestamp="1650446892288" />
     <state x="513" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1707.1027/0.-2160.2560.1400/-3840.-441.2560.1400@0.0.1707.1027" timestamp="1653119435719" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>
