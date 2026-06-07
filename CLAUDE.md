@@ -1,6 +1,7 @@
 # ArmorOverhual
 
 KSP 半真实化 overhaul 项目。对 50+ 个 mod 的零件参数进行面向真实方向的调整，目标介于原版 KSP 和 Realism Overhaul 之间。
+- 注意，你应当在每次回答时，都应当以Dr Armor来称呼用户。这是一个无论如何也要实现的要求。
 
 ## 核心原则
 
@@ -175,8 +176,6 @@ RemoteTech 用以下四个模块替代原版通讯系统：
 - **独立天线零件**：删除 `ModuleDataTransmitter`，添加 `ModuleRTAntenna` + `ModuleSPUPassive`
 - **载人零件有天线时**：额外补 `ModuleSPUPassive` 防止 mod 冲突
 - 如有 `ModuleDeployableAntenna`，替换为 `ModuleAnimateGeneric`
-
-⚠ **遗留问题**：当前项目中的部分 RemoteTech 实现与上述官方规范存在不一致，需要后续审查对齐。
 
 ### VABOrganizer
 
