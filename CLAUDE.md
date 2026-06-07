@@ -194,6 +194,6 @@ RemoteTech 用以下四个模块替代原版通讯系统：
 
 ### TweakScale
 
-- 免费尺寸零件：`type = free`
+- 自由调节尺寸零件：`type = free`
 - 标准堆叠零件：`type = stack`，`defaultScale` 匹配 bulkhead 尺寸
 - 补丁中先清理已有 TweakScale 再重新添加
