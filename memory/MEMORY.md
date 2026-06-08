@@ -1,0 +1,5 @@
+- [Mainframe-0](mainframe-0.md) — machine identity and GameData paths, only valid on Mainframe-0
+- [VABO Engine Categories](vabo-engine-categories.md) — engine subcategory assignments for multi-fuel engines and MK2 Expansion classification (2026-06-07)
+- [Legacy RemoteTech Mismatch](legacy-remotetech-mismatch.md) — RemoteTech patches were audited and aligned with official RT conventions on 2026-06-07
+- [Modification Date Convention](modification-date-convention.md) — every .cfg file's first line must be updated to current date when modified
+- [TODO List](todo-list.md) — active prioritized task list (P0–P4), last updated 2026-06-07
