@@ -210,7 +210,65 @@ MK2 截面从 1.25m×2.5m → 1.875m×3.75m（rescaleFactor ×1.5）。以下为
 | 引擎（另议） | 23 |
 | **总计** | **93** |
 
-排除：`KKAOSS_adapter_base_to_MK2_g`（KPBS 转接器）、`mk2DockingPort` 旧版（zDeprecated，与新版同名）。
+排除：`KKAOSS_adapter_base_to_MK2_g`（KPBS 转接器）、`mk2DockingPort` 旧版（zDeprecated，与新版同名）、`M2X_SolarpanelPod`（title: SP-G Shrouded Solar Array，bulkheadProfiles = srf，非 mk2 零件）。
+
+## 十、燃料箱容积详细计算
+
+所有 mk2 燃料箱零件通过 `Fuel_Conversions.cfg` 的 `:NEEDS[RealFuels]:Final` 规则自动转换为 `ModuleFuelTanks`。转换公式为：
+
+- **LiquidFuel + Oxidizer**（无 ModuleCommand）：`volume = (LF_maxAmount + Ox_maxAmount) × 5`，type = Default
+- **LiquidFuel only**（无 ModuleCommand）：`volume = LF_maxAmount × 5`，type = Fuselage
+- **MonoPropellant only**（无 ModuleCommand）：`volume = MP_maxAmount × 5`，type = ServiceModule
+
+×3.375 补丁应运行在 Fuel_Conversions.cfg 之后（同名 pass `:FINAL`，目录排序 M > G，已确保在之后），直接 assign 最终 volume 值（不使用 `*=`）。
+
+### 10.1 Squad Stock 油箱
+
+| Part Name | Title | 原始 RESOURCE | FC 转换值 | ×3.375 目标 |
+|-----------|-------|--------------|-----------|-------------|
+| `mk2Fuselage` | Mk2 Liquid Fuel Fuselage | LF 800 | 800×5 = 4000 (Fuselage) | **13500** |
+| `mk2FuselageLongLFO` | Mk2 Rocket Fuel Fuselage | LF 360 + Ox 440 | (360+440)×5 = 4000 (Default) | **13500** |
+| `mk2FuselageShortLiquid` | Mk2 Liquid Fuel Fuselage Short | LF 400 | 400×5 = 2000 (Fuselage) | **6750** |
+| `mk2FuselageShortLFO` | Mk2 Rocket Fuel Fuselage Short | LF 180 + Ox 220 | (180+220)×5 = 2000 (Default) | **6750** |
+| `mk2FuselageShortMono` | Mk2 Monopropellant Tank | MP 400 | 400×5 = 2000 (ServiceModule) | **6750** |
+| `mk2SpacePlaneAdapter` | Mk2 to 1.25m Adapter | LF 180 + Ox 220 | (180+220)×5 = 2000 (Default) | **6750** |
+| `mk2_1m_AdapterLong` | Mk2 to 1.25m Adapter Long | LF 360 + Ox 440 | (360+440)×5 = 4000 (Default) | **13500** |
+| `mk2_1m_Bicoupler` | Mk2 Bicoupler | LF 180 + Ox 220 | (180+220)×5 = 2000 (Default) | **6750** |
+| `adapterSize2-Mk2` | 2.5m to Mk2 Adapter | LF 360 + Ox 440 | (360+440)×5 = 4000 (Default) | **13500** |
+| `adapterMk3-Mk2` | Mk3 to Mk2 Adapter | LF 900 + Ox 1100 | (900+1100)×5 = 10000 (Default) | **33750** |
+
+### 10.2 MK2 Expansion 油箱
+
+| Part Name | Title | 原始 RESOURCE | FC 转换值 | ×3.375 目标 |
+|-----------|-------|--------------|-----------|-------------|
+| `M2X_HypersonicNose` | Hypersonic Nose | LF 180 + Ox 220 | (180+220)×5 = 2000 | **6750** |
+| `M2X_InverterFuselage` | Inverter Fuselage | LF 360 + Ox 440 | (360+440)×5 = 4000 | **13500** |
+| `M2X_SpadeTail` | Spade Tail | LF 90 + Ox 110 | (90+110)×5 = 1000 | **3375** |
+| `M2X_SlantAdapterS` | Slant Adapter S | LF 180 + Ox 220 | (180+220)×5 = 2000 | **6750** |
+| `M2X_Short25adapter` | Mk2 to 2.5m Adapter | LF 180 + Ox 220 | (180+220)×5 = 2000 | **6750** |
+| `M2X_Mk2bicoupler` | Mk2 Bicoupler (dual) | LF 360 + Ox 440 | (360+440)×5 = 4000 | **13500** |
+| `M2X_linearTricoupler` | Linear Tricoupler | LF 360 + Ox 440 | (360+440)×5 = 4000 | **13500** |
+| `M2X_625tricoupler` | Mk2 Tricoupler | LF 90 + Ox 110 | (90+110)×5 = 1000 | **3375** |
+
+### 10.3 B9PartSwitch 油箱（非 Fuel_Conversions.cfg 转换）
+
+| Part Name | Title | 原始 baseVolume | 当前补丁值 | ×3.375 目标 |
+|-----------|-------|----------------|-----------|-------------|
+| `M2X_UST` | Service Tank | 200 | @baseVolume = 1800 (fueltank.cfg) | **6075** |
+
+### 10.4 座舱 ServiceModule MFT（手动添加，非 Fuel_Conversions.cfg 转换）
+
+| Part Names | 当前 volume | ×3.375 目标 |
+|------------|-----------|-------------|
+| `M2X_DropshipCockpit`, `M2X_BladeCockpit`, `M2X_TunaCockpit`, `M2X_RavenCockpit`, `M2X_ViperCockpit` | 200 (Command.cfg) | **675** |
+
+### 10.5 无燃料零件确认
+
+以下 mk2 零件经检查**无 RESOURCE 块**（或仅有 ElectricCharge），不受 Fuel_Conversions.cfg 影响：
+
+- Squad：`mk2Cockpit_Standard`（仅 EC+MP，有 ModuleCommand 排除）, `mk2Cockpit_Inline`（同）, `mk2DroneCore`（仅 EC，有 ModuleCommand）, `mk2CrewCabin`（无 RESOURCE）, `mk2CargoBayL/S`（无）, `mk2DockingPort`（无）
+- MK2E：`M2X_Shortbicoupler`（无 RESOURCE）, `M2X_SupersonicNose`（无 RESOURCE）
+- SpaceTux：全部无 LF/Ox/MP RESOURCE
 
 ## Why
 

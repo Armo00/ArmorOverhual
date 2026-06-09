@@ -1,19 +1,29 @@
 ---
 name: todo-list
-description: Active TODO list for the ArmorOverhual project — prioritized tasks awaiting execution (2026-06-08)
+description: Active TODO list for the ArmorOverhual project — prioritized tasks awaiting execution (2026-06-09)
 metadata:
   type: project
 ---
 
-# TODO List (2026-06-08)
+# TODO List (2026-06-09)
 
-## P0 — 当前
+## P0 — 历史（已完成 2026-06-09）
 
-### 8. MK2 家族尺寸调整
-MK2 Expansion 整个零件族的尺寸需要调整。
-- [x] 方案讨论 → 已确认规则文档 [[mk2-scale-rules]]
-- [x] 零件清单 → 93 个零件（70 非引擎 + 23 引擎另议），已录入 [[mk2-scale-rules]]
-- [ ] 实施补丁编写
+### ~~8. MK2 家族尺寸调整~~ ✅
+MK2 家族 rescaleFactor ×1.5，覆盖 93 个零件（70 非引擎 + 23 引擎）。
+- [x] 方案讨论 → 规则文档 [[mk2-scale-rules]]
+- [x] 零件清单 → 93 个零件
+- [x] 非引擎补丁：17 Squad + 44 MK2E + 9 SpaceTux = 70 零件
+- [x] 引擎补丁：23 引擎基础参数 + 推力/热产 + ISP
+- [x] IVA 缩放：11 个 crewed 零件
+- [x] 引擎数据导出 → EngineDatabase_20260609.xlsx
+
+### ~~1. MK2E 引擎调整~~ ✅
+- [x] 所有 JetEngine ISP 调整为 stock×1.15
+- [x] LE-25 "Corgi" RF CONFIGs 缩放 (maxThrust×2.25, heat×2.1)
+- [x] R-44 "Mongrel" RF CONFIGs 缩放
+- [x] X-44 M.A.T.T.O.C.K. ISP 修正 + 推力缩放
+- [x] 全部 23 引擎 rescaleFactor + mass/cost/entryCost + thrust/heat + ISP
 
 ## P0 — 历史（已完成 2026-06-08）
 
@@ -30,13 +40,6 @@ MK2 Expansion 整个零件族的尺寸需要调整。
 - Falcon Landing Leg: 配置文件无异常，疑为 VABOrganizer 运行时问题
 
 ## P1 — 中高优先级
-
-### 1. MK2E 引擎调整
-MK2 Expansion 中需要调整的引擎：
-- 所有 JetEngine 需要调整比冲
-- LE-25 "Corgi" 需要修改引擎配置
-- R-44 需要修改引擎配置
-- X-44 需要调整比冲
 
 ### 6. 错误适配检查
 检查是否有 mod 存在错误适配（如 Starship Expansion Project）。找出问题，整理报告，和用户讨论修改方案。
