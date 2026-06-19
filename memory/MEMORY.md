@@ -5,3 +5,4 @@
 - [TODO List](todo-list.md) — active prioritized task list (P0–P4), last updated 2026-06-08
 - [MK2 Scale Rules](mk2-scale-rules.md) — rescaleFactor ×1.5 parameter adjustment rules for MK2 family, confirmed 2026-06-08
 - [KSP Node Autoscale](ksp-node-autoscale.md) — rescaleFactor automatically scales node coordinates; no manual node adjustment needed
+- [KPBS Scale Rules](KPBS-scale-rules.md) — KPBS original mod path, full PART inventory, and pending scale-rule decisions (2026-06-18)
