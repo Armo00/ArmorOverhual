@@ -6,3 +6,8 @@
 - [MK2 Scale Rules](mk2-scale-rules.md) — rescaleFactor ×1.5 parameter adjustment rules for MK2 family, confirmed 2026-06-08
 - [KSP Node Autoscale](ksp-node-autoscale.md) — rescaleFactor automatically scales node coordinates; no manual node adjustment needed
 - [KPBS Scale Rules](KPBS-scale-rules.md) — KPBS original mod path, full PART inventory, and pending scale-rule decisions (2026-06-18)
+- [Description Append Convention](description-append-convention.md) — `@description ^= :$:  text:` MM syntax for appending text to part descriptions
+- [Battery Rules](battery-rules.md) — energy density (50-150 Wh/kg), price ($500-2000/kWh), and annotation conventions for battery parts (2026-06-19)
+- [Resource & Energy Rules](resource-energy-rules.md) — CRP resource definitions at CommonResources.cfg, density in t/L, 1 EC = 1 Wh, 1 EC/s = 3600 W (2026-06-19)
+- [Nuclear Reactor Rules](nuclear-reactor-rules.md) — efficiency 0.216-0.432, 3% enriched fuel rods, consumption formula, annotation conventions (2026-06-20)
+- [Greenhouse Rules](greenhouse-rules.md) — power 12-20 kW/person, scale economy, EC Ratio = kW/3.6 (2026-06-20)

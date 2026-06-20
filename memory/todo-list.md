@@ -5,7 +5,7 @@ metadata:
   type: project
 ---
 
-# TODO List (2026-06-09)
+# TODO List (2026-06-20)
 
 ## P0 — 历史（已完成 2026-06-09）
 
@@ -44,6 +44,21 @@ MK2 家族 rescaleFactor ×1.5，覆盖 93 个零件（70 非引擎 + 23 引擎�
 ### 6. 错误适配检查
 检查是否有 mod 存在错误适配（如 Starship Expansion Project）。找出问题，整理报告，和用户讨论修改方案。
 
+## P1 — 新任务 (2026-06-20)
+
+### 10. 核反应堆批量调整
+按照 [[nuclear-reactor-rules]] 规则，批量调整所有 mod 中的核反应堆：
+- [ ] 审计所有反应堆的当前热功率/电功率/效率
+- [ ] 按 0.216-0.432 效率范围调整 ElectricalGeneration
+- [ ] 按 3% 丰度公式重新计算并设置 EnrichedUranium Ratio
+- [ ] 标注堆芯装载量和运行时间
+
+### 11. 温室批量调整
+按照 [[greenhouse-rules]] 规则，批量调整所有 mod 中的温室：
+- [ ] 审计所有温室的当前 EC Ratio、支持人数、单人均耗
+- [ ] 按 12-20 kW/person 范围调整 EC Ratio（越大越低）
+- [ ] 更新 descriptions 标注 kW 和 kW/person
+
 ## P2 — 中等优先级
 
 ### 2. Part 类 Mod 适配完整性审计
@@ -54,8 +69,12 @@ MK2 家族 rescaleFactor ×1.5，覆盖 93 个零件（70 非引擎 + 23 引擎�
 
 ## P3 — 大工程，需先讨论
 
-### 3. KPBS 整体尺寸调整
-KPBS（Kerbal Planetary Base Systems）目前是坎星尺寸（~1.25m 级高度），需要调整为真实尺寸。这是大工程，需要先 brainstorming 讨论方案，制定计划后再动工。
+### 3. KPBS 整体尺寸调整 ✅ (基本完成 2026-06-19)
+- [x] rescaleFactor ×2 — 全部 143 零件
+- [x] mass/cost ×4，MFT volume ×8
+- [x] 维生资源 crew-day 重新计算
+- [x] 电池/反应堆/温室专项调整
+- [ ] 28 生产零件 converter rate 待逐一审核
 
 ## P4 — 低优先级，长期规划 / 遗留项
 
