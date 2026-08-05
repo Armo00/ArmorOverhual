@@ -15,7 +15,7 @@
 
 ## S2Pila 重构（三推进剂 → 氢氧单平台多版本）
 
-**优先级：P0** ｜ **状态：**[ ] 待办
+**优先级：P0** ｜ **状态：**[x] 已完成（2026-08-05）
 
 按 `copilot report/03_S2Pila专项重构建议.md` 方案执行：
 - 移除 Methalox / Kerolox 两个 CONFIG，仅保留 Hydrolox
@@ -23,17 +23,21 @@
 - 清理 PLUME 特效命名（当前 Hydrolox 档位误用 Hypergolic 特效）
 - 消除"更高推力 + 更轻质量"的跨推进剂矛盾
 
+**实际落地：** GG 开式循环 46:1（1.7m/0.25m），Standard 14.3MPa 900–1400kN / Boost 15.7MPa 1400–1550kN / Reusable 12.9MPa 600–1250kN，TWR 57.1/60.8/53.1，价格 11000/11500/10500，heatProduction 15。
+
 **记录日期：** 2026-08-05
 
 ---
 
 ## 雷霆-RS（LT-RS）燃料修正
 
-**优先级：P0** ｜ **状态：**[ ] 待办
+**优先级：P0** ｜ **状态：**[x] 已完成（2026-08-05）
 
 `Mods/KIU/ChineseCommercialRocketEngines/methalox_engines.cfg` 中 LT-RS 100%/110% 档位：
 - 描述为"液氧煤油"（现实中雷霆-RS 确为煤油机），但 PROPELLANT 是 LqdMethane + LqdOxygen
 - 方案待定：按现实改为 Kerosene + LqdOxygen（需同步调整推力/Isp/热参数），或改文案为液氧甲烷
+
+**实际落地：** 改回 Kerosene 37.7/LOX 62.3（O/F 1.65），ISP 337/282（官方地面 282s + 真空 1480kN），独立为 KCLV_CCRE_1300K，TEA-TEB 点火限 10 次/飞行，Waterfall kerolox-RD170。
 
 **记录日期：** 2026-08-05
 
@@ -41,12 +45,14 @@
 
 ## 新增 YF-219 引擎
 
-**优先级：P1** ｜ **状态：**[ ] 待办
+**优先级：P1** ｜ **状态：**[x] 已完成（2026-08-05）
 
 在 `Mods/KIU/ChineseCommercialRocketEngines/methalox_engines.cfg` 中新增 YF-219（参考现有 YF-209 的录入方式）：
 - 140 吨级可复用液氧甲烷发动机，燃气发生器循环（开式循环）
 - 真空推力约 140t；真空版 YF-219E 约 160t；海平面型约 140t
 - 装机对象：长征十号乙（二级 1 台）、长征十号丙（一级 9 台 + 二级 1 台 YF-219E）
+
+**实际落地：** KCLV_CCRE_1500M 改造为 YF-219（Dev 318s/152t + E 329s/160t），YF-219EV（355s/162t）追加至 TQ-15A，节流统一 27%（402.6kN），价格 2350/2500/2600。
 
 **记录日期：** 2026-08-05
 
