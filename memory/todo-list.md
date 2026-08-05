@@ -1,11 +1,24 @@
 ---
 name: todo-list
-description: Active TODO list for the ArmorOverhual project — prioritized tasks awaiting execution (2026-06-09)
+description: Active TODO list for the ArmorOverhual project — prioritized tasks awaiting execution (2026-08-05)
 metadata:
   type: project
 ---
 
-# TODO List (2026-06-20)
+# TODO List (2026-08-05)
+
+## 近期已完成 (2026-06 ~ 2026-08)
+
+- [x] KA 引擎全量 RF 转换 (ModuleEngineConfigs)
+- [x] LV-N KA MultiModeEngine 冲突修复
+- [x] LA-150 Water NTR (RF 3-CONFIG)
+- [x] Waterfall RCS 模板迁移 (waterfall-rcs-jet-1 → NewRCS)
+- [x] VABO 全覆盖: MK2E, KRE, KPBS corridors
+- [x] New Glenn 航电迁移 (Interstage→FirstStageTank)
+- [x] CryoTanks H500-144 volume 修正
+- [x] LN2/Water RF tank type 扩展
+- [x] KRE RCS Water/LN2 CONFIG 新增
+- [x] ModuleRFInFlightConfigSwitcher 插件
 
 ## P0 — 历史（已完成 2026-06-09）
 
