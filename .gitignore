@@ -1,2 +1,6 @@
 copilot report/
 memory/local_machine.md
+Source/**/bin/
+Source/**/obj/
+Plugins/*.pdb
+techtree_design/
