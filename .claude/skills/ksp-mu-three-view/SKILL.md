@@ -68,6 +68,35 @@ cp "<output-dir>/<stem>_three_views.png" "techtree_design/<PartName>_three_views
 
 Use the `ksp-image-vision` skill to analyze the composite (do NOT use ASCII art — call the vision model instead). Ask for: overall silhouette, nozzle shape/expansion ratio, pump/combustion section, struts/pipes, and engine-type judgement.
 
+## Engine Engineering Analysis (for engine parts)
+
+When the rendered part is an **engine**, run a dedicated engineering analysis focused on three questions:
+
+1. **喷管扩张比** — determines sea-level vs vacuum-optimized:
+   - Compare nozzle exit diameter vs throat (narrowest) diameter
+   - ~10:1–20:1 area ratio → sea-level/general purpose
+   - ~40:1–80:1 → vacuum-optimized (upper stage)
+2. **燃气发生器** — gas generator cycle evidence:
+   - Exhaust pipes / small nozzles / turbine vent outlets on the pump section sides
+   - Complex pipe runs around pump section → open-cycle GG; preburner → staged combustion
+3. **TVC 结构** — thrust vector control:
+   - Gimbal joint / spherical hinge at nozzle root
+   - Hydraulic actuators / 作动筒 on support structure
+   - Cross-check mesh names (e.g. `Obj_Gimbal`, `Piston*`) in the imported model
+
+Standard prompt (Chinese):
+
+```
+这是KSP发动机三视图（FRONT/SIDE/TOP）。请做工程级分析，重点关注：
+1) 喷管扩张比：对比喷管出口直径与喉部（最窄处）直径，估算扩张比（面积比）。出口直径约为喉部直径的几倍？这决定是海平面型还是真空特化型。
+2) 燃气发生器：在泵体/涡轮段侧面或喷管上方，有没有排气管、小喷管、或涡轮废气出口结构？
+3) TVC结构：喷管根部或上方有没有万向节、液压执行器、作动筒结构？
+4) 泵段：顶部结构内部有没有明显的涡轮泵（圆筒+管道）特征？
+请分点详细回答，用中文。
+```
+
+Also cross-reference part config for ground truth: `engineID`, `atmosphereCurve` (vac ISP vs sl ISP), `gimbalRange` (TVC), cycle notes in description. Mesh names from the .blend can confirm gimbal/actuator presence.
+
 ## Key Reference Data
 
 - The three-view tool scripts are in `tools/KSP_MU_ThreeView_Tool/` with a Chinese README (`README_使用说明.md`)
