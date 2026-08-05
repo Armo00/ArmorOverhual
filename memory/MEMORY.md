@@ -2,7 +2,7 @@
 - [VABO Engine Categories](vabo-engine-categories.md) — engine subcategory assignments for multi-fuel engines and MK2 Expansion classification (2026-06-07)
 - [Legacy RemoteTech Mismatch](legacy-remotetech-mismatch.md) — RemoteTech patches were audited and aligned with official RT conventions on 2026-06-07
 - [Modification Date Convention](modification-date-convention.md) — every .cfg file's first line must be updated to current date when modified
-- [TODO List](todo-list.md) — active prioritized task list (P0–P4), last updated 2026-06-08
+- [Long-Term TODO List](../docs/long_term_to_do_list.md) — 唯一的 to-do 清单（P0–P4 分级 + 状态追踪 + 记录日期），2026-08-05 起替代 todo-list.md
 - [MK2 Scale Rules](mk2-scale-rules.md) — rescaleFactor ×1.5 parameter adjustment rules for MK2 family, confirmed 2026-06-08
 - [KSP Node Autoscale](ksp-node-autoscale.md) — rescaleFactor automatically scales node coordinates; no manual node adjustment needed
 - [KPBS Scale Rules](KPBS-scale-rules.md) — KPBS original mod path, full PART inventory, and pending scale-rule decisions (2026-06-18)
