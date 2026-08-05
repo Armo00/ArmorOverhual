@@ -4,3 +4,4 @@ Source/**/bin/
 Source/**/obj/
 Plugins/*.pdb
 techtree_design/
+.env
