@@ -60,17 +60,19 @@
 
 ## 核反应堆批量调整
 
-**优先级：P1** ｜ **状态：**[ ] 待办
+**优先级：P1** ｜ **状态：**[ ] 待办（主体已完成，剩余收尾）
 
-**规则：** [memory/nuclear-reactor-rules.md](../memory/nuclear-reactor-rules.md)
+**规则：** [memory/nuclear-reactor-rules.md](../memory/nuclear-reactor-rules.md)（2026-08-06 更新：丰度统一 **19% HALEU**）
 
-按规则批量审计并调整所有 mod 中的核反应堆：
-- 审计所有反应堆当前热功率/电功率/效率
-- 按 0.216–0.432 效率范围调整 ElectricalGeneration
-- 按 3% 丰度公式重新计算 EnrichedUranium Ratio
-- 标注堆芯装载量和运行时间
+**已完成（2026-08-06）：**
+- KPBS 反应堆：Ratio 2.35e-8、装载 12u（16.2 年）、注释规范
+- NFE 8 个反应堆：质量 ×4 / rescale ×2 / 热功率 ×4，效率 0.24–0.432 定档，电功率取整 EC/s，19% HALEU Ratio + 按寿命装载（`Mods/NF-Electrical/Reactors.cfg`）
 
-**记录日期：** 2026-06-20
+**剩余（下一步立刻调整）：**
+- M2X_Reactor：45 MW 热 / 4% 效率异常（密度 12,857 kW/t），NFE 补丁与项目补丁冲突（NFE 删 ModuleResourceConverter 导致项目 FINAL 修改失效），需重定热功率/效率/燃料
+- 核热引擎 NTR（M2X_AtomicJet / M2X_Pluto / KerbalAtomics）：按 19% HALEU 规则适配
+
+**记录日期：** 2026-06-20（2026-08-06 更新）
 
 ---
 
