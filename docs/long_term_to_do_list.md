@@ -4,12 +4,13 @@
 >
 > **本文件是唯一的 to-do 清单**（2026-08-05 起，替代 memory/todo-list.md）。
 >
-> **优先级体系（P0–P4）：**
+> **优先级体系（P0–P4，另有 P6）：**
 > - P0：当前主线，方案已就绪，立即执行
 > - P1：高优先，规则已定或可顺带执行
 > - P2：审计/审查类，先出报告再定方案
 > - P3：大工程/规则设计，需先讨论方案
 > - P4：低优先级，长期规划/遗留项
+> - P6：更低优先级，仅记录待规划（2026-08-06 新增）
 
 ---
 
@@ -60,16 +61,18 @@
 
 ## 核反应堆批量调整
 
-**优先级：P1** ｜ **状态：**[ ] 待办（主体已完成，剩余收尾）
+**优先级：P1** ｜ **状态：**[x] 主体完成（2026-08-06），NTR 收尾待办
 
-**规则：** [memory/nuclear-reactor-rules.md](../memory/nuclear-reactor-rules.md)（2026-08-06 更新：丰度统一 **19% HALEU**）
+**规则：** [memory/nuclear-reactor-rules.md](../memory/nuclear-reactor-rules.md)（2026-08-06 固化：19% HALEU、密度 1100-1300 kW/t、kW/cost 基准、散热 T⁴ 曲线、Patch 惯例）
 
 **已完成（2026-08-06）：**
-- KPBS 反应堆：Ratio 2.35e-8、装载 12u（16.2 年）、注释规范
+- KPBS 反应堆：Ratio 2.35e-8、装载 12u（16.2 年）、cost 200000（0.01 kW/cost）
 - NFE 8 个反应堆：质量 ×4 / rescale ×2 / 热功率 ×4，效率 0.24–0.432 定档，电功率取整 EC/s，19% HALEU Ratio + 按寿命装载（`Mods/NF-Electrical/Reactors.cfg`）
+- NFE 修复：模块整体重写（@key 选择器不可靠）、ResourceName 选择器、TweakScale defaultScale 显式覆盖、tiny B9PartSwitch 节点 ×2
+- M2X_Reactor 重设计：4t / 800kW 热 / 80 EC/s（36%）/ 200 kW/t / 集成散热 800kW@800K / cost 160000（0.005 kW/cost）（`Mods/SystemHeat/MK2Expansion/M2X_Reactor.cfg`）
+- Squad 散热器：600K 曲线（×5）—— radPanelEdge 65 / Sm 25 / Lg 125 / foldingRadSmall 125 / Med 500 / Large 2500
 
-**剩余（下一步立刻调整）：**
-- M2X_Reactor：45 MW 热 / 4% 效率异常（密度 12,857 kW/t），NFE 补丁与项目补丁冲突（NFE 删 ModuleResourceConverter 导致项目 FINAL 修改失效），需重定热功率/效率/燃料
+**剩余：**
 - 核热引擎 NTR（M2X_AtomicJet / M2X_Pluto / KerbalAtomics）：按 19% HALEU 规则适配
 
 **记录日期：** 2026-06-20（2026-08-06 更新）
@@ -143,3 +146,33 @@
 属于长期规划性质。
 
 **记录日期：** 2026-06-08
+
+---
+
+## 电推批量修正
+
+**优先级：P6** ｜ **状态：**[ ] 待办
+
+电推（离子推进器等）参数批量修正。
+
+**记录日期：** 2026-08-06
+
+---
+
+## 方舟反应堆批量修正
+
+**优先级：P6** ｜ **状态：**[ ] 待办
+
+方舟反应堆（Arca/Ark？）参数批量修正。
+
+**记录日期：** 2026-08-06
+
+---
+
+## Plasma 推进器批量修正
+
+**优先级：P6** ｜ **状态：**[ ] 待办
+
+Plasma 推进器参数批量修正。
+
+**记录日期：** 2026-08-06
