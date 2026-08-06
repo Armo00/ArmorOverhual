@@ -10,8 +10,9 @@ KSP 半真实化 overhaul 项目。对 50+ 个 mod 的零件参数进行面向�
 - 不覆盖现有定位：新 mod 入库时，先检查工作区已有的同类零件分布，避免重复定位
 - 补丁必须用 `:NEEDS` 守卫，避免在未安装目标 mod 时污染游戏
 - 完成一轮适配或修改后，向用户请示是否需要 git 提交。如用户确认，则根据修改内容进行提交并推送到远程
-- 机器身份由 `memory/local_machine.md` 定义。如果该文件不存在或未标明本机为 **Mainframe-0**，则视为处于其他机器，KSP 环境不可用，仅本项目文件可用
-- 仅在 Mainframe-0 上可访问 KSP GameData 路径和 Engine Database 文件（具体路径见 `memory/local_machine.md`），不应在其他机器上硬编码这些路径
+- 机器身份与各机器的 KSP 路径、Engine Database 位置一律遵循 `memory/local_machine.md`，**不在此文件暴露本机路径**（该记忆文件已被 `.gitignore` 排除，不进入公开仓库），不应在公开配置中硬编码路径
+- 机器分类：**Mainframe-0** = KSP 机器（可启动 KSP 程序）；**Mainframe-2** = 临时机器（可访问原始 KSP 环境，但**不可启动 KSP 程序**）；其他机器 = 仅本项目文件可用
+- 机器名称判定工具：`powershell -ExecutionPolicy Bypass -File tools/check-machine-name.ps1`
 - 项目记忆文件（`memory/*.md`）纳入 git 管理，详见 [[memory/MEMORY.md]]
 - 每个 cfg 文件第一行标注最后修改日期：`// Modified YYYY-MM-DD` 这个文件发生了变更，一定也要同步变更这里。
 

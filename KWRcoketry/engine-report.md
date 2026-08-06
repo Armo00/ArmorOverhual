@@ -8,7 +8,7 @@
 
 ## 1. 本轮参数口径
 
-- 数据依据一：C:\Users\26549\OneDrive\文档\KSP Engine Tweak Chart.xlsx 中的 Engine Database 页面。
+- 数据依据一：Engine Database 电子表格中的 Engine Database 页面（文件位置见 `memory/local_machine.md`）。
 - 数据依据二：KWRocketry 原始 cfg。
 - 数据依据三：你补充的外观、燃烧室数量、循环类型和包络尺寸说明。
 - 本版不建议先动外形尺寸，也不建议先改 rescaleFactor，优先通过参数重定位来补齐系列缺口。
