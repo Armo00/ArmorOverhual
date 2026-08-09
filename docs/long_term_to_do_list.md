@@ -91,14 +91,15 @@
 
 ## 温室批量调整
 
-**优先级：P1** ｜ **状态：**[ ] 待办
+**优先级：P1** ｜ **状态：** [x] 已完成（2026-08-09）
 
 **规则：** [memory/greenhouse-rules.md](../memory/greenhouse-rules.md)
 
 按规则批量审计并调整所有 mod 中的温室：
 - 审计所有温室当前 EC Ratio、支持人数、单人均耗
-- 按 12–20 kW/person 范围调整 EC Ratio
+- 按 12–20 kW/person 范围调整 EC Ratio（线性插值 1人→20 / 15人→12）
 - 更新 descriptions 标注 kW 和 kW/person
+- 9 个零件（KPBS ×2 + SSPXR ×6 + Phoenix ×1）全部调整并分配 VABO greenhouses 分类
 
 **记录日期：** 2026-06-20
 
@@ -106,7 +107,7 @@
 
 ## RTG 全局扫描与调整
 
-**优先级：P1** ｜ **状态：**[ ] 待办
+**优先级：P1** ｜ **状态：**[x] 已完成（2026-08-09，commit 7222245）
 
 RTG（放射性同位素热电发电机）全局扫描：
 - 扫描所有 mod 中的 RTG 零件
