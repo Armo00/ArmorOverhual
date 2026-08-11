@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'ArmorOverhaul'">
+    <!-- KSP scans every DLL below GameData, including normal obj folders. -->
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\..\BuildArtifacts\ArmorOverhaul\obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>
