@@ -143,7 +143,7 @@ Assert-True (-not ($sourceText -match 'WaitForSeconds|StartCoroutine|realtimeSin
 
 $cfg = Get-Content -LiteralPath $phoenixReactor -Raw -Encoding UTF8
 $firstLine = Get-Content -LiteralPath $phoenixReactor -Encoding UTF8 -TotalCount 1
-Assert-True ($firstLine -eq '// Modified 2026-08-11') 'Phoenix Arc Reactor modification date is incorrect.'
+Assert-True ($firstLine -eq '// Modified 2026-08-20') 'Phoenix Arc Reactor modification date is incorrect.'
 Assert-True ($cfg.Contains('@name = phoenixreactor-0625')) 'phoenixreactor-0625 clone is missing.'
 Assert-True ($cfg.Contains('name = ModuleArcReactor')) 'phoenixreactor-0625 does not use ModuleArcReactor.'
 Assert-True (-not $cfg.Contains('name = ModuleResourceConverter')) 'Legacy ModuleResourceConverter remains on phoenixreactor-0625.'
@@ -160,6 +160,26 @@ Assert-True ($electricChargeOutput.Groups[1].Value -match 'blocked_when_full\s*=
 Assert-True ($electricChargeOutput.Groups[1].Value -match 'FlowMode\s*=\s*ALL_VESSEL') 'ElectricCharge output does not reach vessel-wide storage.'
 Assert-True ($heliumOutput.Groups[1].Value -match 'blocked_when_full\s*=\s*false') 'LqdHelium must vent excess output.'
 Assert-True (-not ($cfg -match 'DumpExcess\s*=')) 'phoenixreactor-0625 still uses the legacy DumpExcess setting.'
+
+$reactorVariants = @(
+    @{ Id = 'phoenixreactor-0625'; Mass = 0.04; Power = 3000000; Fuel = 100; EntryCost = 3000000 },
+    @{ Id = 'phoenixreactor-125'; Mass = 0.32; Power = 24000000; Fuel = 800; EntryCost = 3150000 },
+    @{ Id = 'phoenixreactor-1875'; Mass = 1.08; Power = 81000000; Fuel = 2700; EntryCost = 3300000 },
+    @{ Id = 'phoenixreactor-250'; Mass = 2.56; Power = 192000000; Fuel = 6400; EntryCost = 3600000 },
+    @{ Id = 'phoenixreactor-375'; Mass = 8.64; Power = 648000000; Fuel = 21600; EntryCost = 4050000 },
+    @{ Id = 'phoenixreactor-500'; Mass = 20.48; Power = 1536000000; Fuel = 51200; EntryCost = 4500000 }
+)
+
+foreach ($variant in $reactorVariants) {
+    Assert-True ($cfg.Contains("@name = $($variant.Id)")) "Missing Arc Reactor variant: $($variant.Id)"
+    Assert-True ($cfg -match "(?s)@name\s*=\s*$([regex]::Escape($variant.Id)).*?@mass\s*=\s*$($variant.Mass)") "Incorrect mass for $($variant.Id)."
+    Assert-True ($cfg -match "(?s)@name\s*=\s*$([regex]::Escape($variant.Id)).*?@entryCost\s*=\s*$($variant.EntryCost)") "Incorrect entry cost for $($variant.Id)."
+}
+
+Assert-True ($cfg.Contains('@Ratio = 1536000000')) '5m Arc Reactor electrical output is incorrect.'
+Assert-True ($cfg.Contains('@maxAmount = 51200')) '5m Arc Reactor fuel or helium capacity is incorrect.'
+Assert-True (($reactorVariants[-1].EntryCost / $reactorVariants[0].EntryCost) -le 1.5) 'Largest Arc Reactor entry cost exceeds 1.5x baseline.'
+Assert-True ($cfg.Contains('@PART[phoenixreactor-*]:NEEDS[VABOrganizer]:Final')) 'Arc Reactor family VABO patch is missing.'
 
 $pluginCopies = @(Get-ChildItem -LiteralPath $root -Recurse -Filter 'ArmorOverhaul.dll')
 Assert-True ($pluginCopies.Count -eq 1) 'ArmorOverhaul.dll exists more than once below GameData and may be loaded twice by KSP.'
