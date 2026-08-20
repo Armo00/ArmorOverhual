@@ -95,6 +95,88 @@ defaults an omitted flow mode to `NO_FLOW`, which limits both production and
 fill-level measurement to the converter's own part. Vessel-wide electrical
 generation should use `FlowMode = ALL_VESSEL`.
 
+## Variable ISP/thrust for stock ModuleEnginesFX
+
+`ModuleVariableIspThrust` continuously adjusts the ISP curve and maximum
+thrust of one stock `ModuleEnginesFX`. It deliberately rejects derived engine
+types, including RealFuels engines. `engineID` may be omitted only when the
+part contains exactly one stock `ModuleEnginesFX`.
+
+Status: compiled and covered by static/assembly tests; in-game PAW testing is
+pending.
+
+The persistent PAW slider is available in the editor and, by default, in
+flight while the engine is running. Six action-group actions select 0, 20,
+40, 60, 80, or 100 percent directly. The PAW also reports vacuum ISP, vacuum
+maximum thrust, and current-environment ISP.
+
+```cfg
+MODULE
+{
+    name = ModuleVariableIspThrust
+    engineID = MainEngine
+
+    performanceSetting = 50
+    sliderStep = 1
+    allowInFlight = true
+    allowWhileRunning = true
+    scaleMinThrust = true
+    thrustInterpolation = linear // linear or constantPower
+
+    PERFORMANCE_POINT
+    {
+        percent = 0
+        maxThrust = 1000
+
+        atmosphereCurve
+        {
+            key = 0 300
+            key = 1 260
+        }
+    }
+
+    PERFORMANCE_POINT
+    {
+        percent = 100
+        maxThrust = 600
+
+        atmosphereCurve
+        {
+            key = 0 450
+            key = 1 320
+        }
+    }
+}
+```
+
+At least the 0 and 100 percent points are required. Intermediate points are
+optional. All explicitly supplied `atmosphereCurve` nodes must use identical
+pressure keys. At intermediate slider positions, the module blends every ISP
+key and its tangents.
+
+A point may use `vacuumIsp` instead of `atmosphereCurve`. In that shorthand,
+the engine's original atmosphere curve is scaled by the ratio between the
+point's vacuum ISP and the original vacuum ISP:
+
+```cfg
+PERFORMANCE_POINT
+{
+    percent = 0
+    vacuumIsp = 300
+    maxThrust = 1000
+}
+```
+
+`maxThrust` is vacuum maximum thrust in kN. With `linear`, maximum thrust is
+linearly interpolated between adjacent points. With `constantPower`, the
+module interpolates `maxThrust * vacuumIsp` and derives thrust from the current
+vacuum ISP. An optional `minThrust` may be supplied per point; otherwise the
+original minimum/maximum thrust ratio is preserved when `scaleMinThrust` is
+true.
+
+Do not attach this module to `ModuleEngines`, `ModuleEnginesRF`, or another
+class derived from `ModuleEnginesFX`.
+
 `ModuleRFInFlightConfigSwitcher` switches configurations on one live
 `ModuleEnginesRF` instance by calling RealFuels' public
 `ModuleEngineConfigs.SetConfiguration(string, bool)` API.
