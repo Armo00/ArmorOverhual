@@ -3,5 +3,6 @@ memory/local_machine.md
 Source/**/bin/
 Source/**/obj/
 Plugins/*.pdb
+Plugins/PluginData/
 techtree_design/
 .env
