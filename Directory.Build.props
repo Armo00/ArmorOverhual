@@ -1,5 +1,5 @@
 <Project>
-  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'ArmorOverhaul' Or '$(MSBuildProjectName)' == 'CrewListSorter'">
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'ArmorOverhaul' Or '$(MSBuildProjectName)' == 'CrewListSorter' Or '$(MSBuildProjectName)' == 'RoboticsKJRCompat'">
     <!-- KSP scans every DLL below GameData, including normal obj folders. -->
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\..\BuildArtifacts\$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
