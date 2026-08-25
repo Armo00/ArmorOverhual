@@ -220,3 +220,20 @@ Plasma 推进器参数批量修正。
 - 是否允许使用近似数据回填旧存档，或只从插件安装后开始精确记录
 
 **记录日期：** 2026-08-15
+
+---
+
+## RoboticsKJRCompat：Stock PAW Servo 锁定同步
+
+**优先级：P4** ｜ **状态：**[ ] 已遗留（当前有可用绕行方案）
+
+Stock 零件右键菜单中的 `Locked` 开关会改变 Servo 字段显示，但在当前
+mod 环境中不会同步触发载具级 Auto Strut ACTIVE/SUSPENDED 状态。管理窗口
+和动作组的锁定/解锁均能正常同步，可继续使用。
+
+已尝试 BaseField、UIPartActionFieldItem 和 UI_Control 三条 PAW 回调路径，
+均未解决。详细诊断与后续恢复调查前应增加的观测字段见
+[`memory/robotics-kjr-compat.md`](../memory/robotics-kjr-compat.md)。除非 Dr Armor
+明确重新启动调查，否则不再继续修改。
+
+**记录日期：** 2026-08-23

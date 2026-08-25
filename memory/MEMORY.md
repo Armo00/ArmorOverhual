@@ -11,3 +11,5 @@
 - [Resource & Energy Rules](resource-energy-rules.md) — CRP resource definitions at CommonResources.cfg, density in t/L, 1 EC = 1 Wh, 1 EC/s = 3600 W (2026-06-19)
 - [Nuclear Reactor Rules](nuclear-reactor-rules.md) — efficiency 0.216-0.432, 3% enriched fuel rods, consumption formula, annotation conventions (2026-06-20)
 - [Greenhouse Rules](greenhouse-rules.md) — power 12-20 kW/person, scale economy, EC Ratio = kW/3.6 (2026-06-20)
+- [Variable ISP Throttle Resources](variable-isp-throttle-resources.md) — ModuleVariableIspThrust absolute U/s input/output resource rules and LA-151 integration (2026-08-20)
+- [Robotics / KJR Compatibility](robotics-kjr-compat.md) — vessel-wide Auto Strut suspension, Servo manager window, working control paths, and deferred PAW lock-sync issue (2026-08-23)
