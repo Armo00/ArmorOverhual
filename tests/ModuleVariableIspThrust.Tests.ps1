@@ -61,6 +61,9 @@ foreach ($methodName in @(
     Assert-True ($null -ne $method) "Missing action-group control: $methodName"
 }
 
+$fixedUpdate = $methods | Where-Object Name -eq 'OnFixedUpdate' | Select-Object -First 1
+Assert-True ($null -ne $fixedUpdate) 'Throttle resource processing has no OnFixedUpdate hook.'
+
 $settingField = $type.GetField('performanceSetting')
 Assert-True ($null -ne $settingField) 'Persistent performanceSetting field is missing.'
 $kspField = $settingField.GetCustomAttributes($false) | Where-Object { $_.GetType().Name -eq 'KSPField' } | Select-Object -First 1
@@ -74,6 +77,11 @@ $sourceText = Get-Content -LiteralPath $source -Raw -Encoding UTF8
 Assert-True ($sourceText.Contains('candidate.GetType() != typeof(ModuleEnginesFX)')) 'Exact ModuleEnginesFX type guard is missing.'
 Assert-True ($sourceText.Contains('engine.SetupPropellant()')) 'Fuel-flow recalculation is missing.'
 Assert-True ($sourceText.Contains('PERFORMANCE_POINT')) 'Performance-point parser is missing.'
+Assert-True ($sourceText.Contains('LoadResourceNodeCopies(node, "INPUT_RESOURCE"')) 'INPUT_RESOURCE parser is missing.'
+Assert-True ($sourceText.Contains('LoadResourceNodeCopies(node, "OUTPUT_RESOURCE"')) 'OUTPUT_RESOURCE parser is missing.'
+Assert-True ($sourceText.Contains('engine.currentThrottle')) 'Throttle resource rate is not tied to current engine throttle.'
+Assert-True ($sourceText.Contains('TimeWarp.fixedDeltaTime')) 'Throttle resource rate is not integrated over physics time.'
+Assert-True ($sourceText.Contains('part.RequestResource(')) 'Throttle resources are not transferred through KSP resource flow.'
 
 $flags = [Reflection.BindingFlags]'NonPublic,Static'
 $constantPower = $type.GetMethod('InterpolateConstantPowerThrust', $flags)
@@ -99,6 +107,27 @@ $fuelFlow = $calculateFuelFlow.Invoke($null, @(
 Assert-Near $fuelFlow (883 / (500 * $gravity)) 0.000001 'Maximum fuel flow is not derived from the selected thrust and vacuum ISP.'
 $seaLevelThrust = $fuelFlow * 400 * $gravity
 Assert-Near $seaLevelThrust 706.4 0.001 'The 883 kN / 500 s operating point does not produce 706.4 kN at 400 s sea-level ISP.'
+
+$calculateThrottleResourceAmount = $type.GetMethod('CalculateThrottleResourceAmount', $flags)
+Assert-True ($null -ne $calculateThrottleResourceAmount) 'Throttle resource amount helper is missing.'
+$halfThrottleAmount = $calculateThrottleResourceAmount.Invoke($null, @(
+    [double]0.00002296296,
+    [double]0.5,
+    [double]10
+))
+Assert-Near $halfThrottleAmount 0.0001148148 0.000000000001 'Throttle resource ratio is not interpreted as units per second.'
+$clampedThrottleAmount = $calculateThrottleResourceAmount.Invoke($null, @(
+    [double]0.00002296296,
+    [double]2,
+    [double]1
+))
+Assert-Near $clampedThrottleAmount 0.00002296296 0.000000000001 'Throttle resource calculation does not clamp throttle to 100 percent.'
+$zeroThrottleAmount = $calculateThrottleResourceAmount.Invoke($null, @(
+    [double]0.00002296296,
+    [double]0,
+    [double]10
+))
+Assert-Near $zeroThrottleAmount 0 0.000000000001 'Throttle resources are consumed while the engine throttle is zero.'
 
 $scaleCurve = $type.GetMethod('ScaleCurve', $flags)
 $blendCurves = $type.GetMethod('BlendCurves', $flags)

@@ -40,6 +40,39 @@ Assert-True ($text.Contains('thrustInterpolation = constantPower')) 'LA-151 does
 Assert-True ($text.Contains('!MODULE[ModuleEngineConfigs],*{}')) 'LA-151 does not remove inherited RF engine configurations.'
 Assert-True ($text.Contains('!MODULE[ModuleRFInFlightConfigSwitcher],*{}')) 'LA-151 does not remove the RF in-flight switcher.'
 Assert-True (-not $text.Contains('name = ModuleEnginesRF')) 'LA-151 still declares ModuleEnginesRF.'
+Assert-True (-not $text.Contains('ignoreForIsp')) 'LA-151 still relies on ignoreForIsp for ArcElement consumption.'
+Assert-True (-not ($text -match '(?s)PROPELLANT\s*\{[^}]*name\s*=\s*ArcElement')) 'ArcElement is still configured as an engine propellant.'
+
+$gimbalModule = [regex]::Match($text, '(?s)MODULE\s*\{\s*name\s*=\s*ModuleGimbal\s*(?<body>.*?)\}')
+Assert-True ($gimbalModule.Success) 'LA-151 has no ModuleGimbal for thrust-vector control.'
+$gimbalBody = $gimbalModule.Groups['body'].Value
+Assert-True ($gimbalBody -match '(?m)^\s*gimbalTransformName\s*=\s*thrustTransform\s*$') 'LA-151 TVC is not bound to the ReStock thrustTransform.'
+Assert-True ($gimbalBody -match '(?m)^\s*gimbalRange\s*=\s*15\s*$') 'LA-151 TVC range is not 15 degrees.'
+Assert-True ($gimbalBody -match '(?m)^\s*enablePitch\s*=\s*true\s*$') 'LA-151 TVC pitch control is disabled.'
+Assert-True ($gimbalBody -match '(?m)^\s*enableYaw\s*=\s*true\s*$') 'LA-151 TVC yaw control is disabled.'
+Assert-True ($gimbalBody -match '(?m)^\s*enableRoll\s*=\s*true\s*$') 'LA-151 TVC roll control is disabled.'
+Assert-True ($gimbalBody -match '(?m)^\s*useGimbalResponseSpeed\s*=\s*true\s*$') 'LA-151 TVC does not use an explicit response speed.'
+Assert-True ($gimbalBody -match '(?m)^\s*gimbalResponseSpeed\s*=\s*16\s*$') 'LA-151 TVC response speed is incorrect.'
+
+$inputResource = [regex]::Match($text, '(?s)INPUT_RESOURCE\s*\{(?<body>.*?)\}')
+Assert-True ($inputResource.Success) 'LA-151 has no throttle-linked INPUT_RESOURCE.'
+$inputBody = $inputResource.Groups['body'].Value
+Assert-True ($inputBody -match '(?m)^\s*name\s*=\s*ArcElement\s*$') 'LA-151 throttle input is not ArcElement.'
+Assert-True ($inputBody -match '(?m)^\s*flowMode\s*=\s*NO_FLOW\s*$') 'LA-151 ArcElement input does not use NO_FLOW.'
+$arcRatioMatch = [regex]::Match($inputBody, '(?m)^\s*ratio\s*=\s*(?<ratio>\d+(?:\.\d+)?)')
+Assert-True ($arcRatioMatch.Success) 'LA-151 ArcElement input ratio is missing.'
+$arcRatio = [double]$arcRatioMatch.Groups['ratio'].Value
+Assert-Near $arcRatio 0.00002296296 0.000000000001 'LA-151 ArcElement full-throttle rate is incorrect.'
+$arcDurationDays = 100.0 / $arcRatio / 86400.0
+Assert-Near $arcDurationDays 50.4032 0.001 'LA-151 does not provide approximately 50 days from 100 units of ArcElement.'
+
+$outputResource = [regex]::Match($text, '(?s)OUTPUT_RESOURCE\s*\{(?<body>.*?)\}')
+Assert-True ($outputResource.Success) 'LA-151 has no throttle-linked OUTPUT_RESOURCE.'
+$outputBody = $outputResource.Groups['body'].Value
+Assert-True ($outputBody -match '(?m)^\s*name\s*=\s*LqdHelium\s*$') 'LA-151 throttle output is not LqdHelium.'
+Assert-True ($outputBody -match '(?m)^\s*ratio\s*=\s*0\.00009589698\s*$') 'LA-151 LqdHelium output ratio is incorrect.'
+Assert-True ($outputBody -match '(?m)^\s*flowMode\s*=\s*NO_FLOW\s*$') 'LA-151 LqdHelium output does not use NO_FLOW.'
+Assert-True ($outputBody -match '(?m)^\s*dumpExcess\s*=\s*true\s*$') 'LA-151 LqdHelium output is not allowed to dump excess.'
 
 $pointPattern = '(?s)PERFORMANCE_POINT\s*\{\s*percent\s*=\s*(?<percent>\d+(?:\.\d+)?)\s*maxThrust\s*=\s*(?<thrust>\d+(?:\.\d+)?).*?key\s*=\s*0\s+(?<vacuum>\d+(?:\.\d+)?).*?key\s*=\s*1\s+(?<seaLevel>\d+(?:\.\d+)?)\s*\}'
 $matches = [regex]::Matches($text, $pointPattern)

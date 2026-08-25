@@ -12,6 +12,7 @@ namespace ArmorOverhaul
     public class ModuleVariableIspThrust : PartModule
     {
         private const float ComparisonTolerance = 0.0001f;
+        private const double ResourceTolerance = 1e-9;
 
         private enum ThrustInterpolationMode
         {
@@ -27,6 +28,15 @@ namespace ArmorOverhaul
             public bool HasMinThrust;
             public float VacuumIsp;
             public FloatCurve AtmosphereCurve;
+        }
+
+        private sealed class ThrottleResource
+        {
+            public string ResourceName;
+            public int ResourceId = -1;
+            public double Ratio;
+            public ResourceFlowMode FlowMode = ResourceFlowMode.NULL;
+            public bool DumpExcess = true;
         }
 
         [KSPField]
@@ -63,7 +73,11 @@ namespace ArmorOverhaul
         public string currentIspDisplay = "Unavailable";
 
         private readonly List<ConfigNode> performancePointNodes = new List<ConfigNode>();
+        private readonly List<ConfigNode> inputResourceNodes = new List<ConfigNode>();
+        private readonly List<ConfigNode> outputResourceNodes = new List<ConfigNode>();
         private readonly List<PerformancePoint> performancePoints = new List<PerformancePoint>();
+        private readonly List<ThrottleResource> inputResources = new List<ThrottleResource>();
+        private readonly List<ThrottleResource> outputResources = new List<ThrottleResource>();
         private ModuleEnginesFX engine;
         private FloatCurve originalAtmosphereCurve;
         private float originalMinThrust;
@@ -116,11 +130,15 @@ namespace ArmorOverhaul
             base.OnLoad(node);
 
             ConfigNode[] nodes = node.GetNodes("PERFORMANCE_POINT");
-            if (nodes.Length == 0) return;
+            if (nodes.Length > 0)
+            {
+                performancePointNodes.Clear();
+                foreach (ConfigNode performancePointNode in nodes)
+                    performancePointNodes.Add(performancePointNode.CreateCopy());
+            }
 
-            performancePointNodes.Clear();
-            foreach (ConfigNode performancePointNode in nodes)
-                performancePointNodes.Add(performancePointNode.CreateCopy());
+            LoadResourceNodeCopies(node, "INPUT_RESOURCE", inputResourceNodes);
+            LoadResourceNodeCopies(node, "OUTPUT_RESOURCE", outputResourceNodes);
         }
 
         public override void OnStart(StartState state)
@@ -159,6 +177,22 @@ namespace ArmorOverhaul
             }
         }
 
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+            if (!initialized || engine == null || part == null || !HighLogic.LoadedSceneIsFlight)
+                return;
+            if (!engine.EngineIgnited || !engine.isOperational || engine.flameout)
+                return;
+
+            double throttle = Clamp01(engine.currentThrottle);
+            double deltaTime = TimeWarp.fixedDeltaTime;
+            if (throttle <= ResourceTolerance || deltaTime <= ResourceTolerance)
+                return;
+
+            ProcessThrottleResources(throttle, deltaTime);
+        }
+
         private void Initialize()
         {
             if (initialized || initializationFailed) return;
@@ -190,8 +224,17 @@ namespace ArmorOverhaul
             if (performancePointNodes.Count == 0)
                 FindPerformancePointNodesInPartConfig();
 
+            if (inputResourceNodes.Count == 0 && outputResourceNodes.Count == 0)
+                FindResourceNodesInPartConfig();
+
             string validationError;
             if (!BuildPerformancePoints(out validationError))
+            {
+                FailInitialization(validationError);
+                return;
+            }
+
+            if (!BuildThrottleResources(out validationError))
             {
                 FailInitialization(validationError);
                 return;
@@ -265,6 +308,159 @@ namespace ArmorOverhaul
 
             foreach (ConfigNode pointNode in candidates[0].GetNodes("PERFORMANCE_POINT"))
                 performancePointNodes.Add(pointNode.CreateCopy());
+        }
+
+        private static void LoadResourceNodeCopies(
+            ConfigNode source,
+            string nodeName,
+            List<ConfigNode> destination)
+        {
+            ConfigNode[] nodes = source.GetNodes(nodeName);
+            if (nodes.Length == 0) return;
+
+            destination.Clear();
+            foreach (ConfigNode resourceNode in nodes)
+                destination.Add(resourceNode.CreateCopy());
+        }
+
+        private void FindResourceNodesInPartConfig()
+        {
+            if (part.partInfo == null || part.partInfo.partConfig == null) return;
+
+            List<ConfigNode> candidates = new List<ConfigNode>();
+            foreach (ConfigNode moduleNode in part.partInfo.partConfig.GetNodes("MODULE"))
+            {
+                if (moduleNode.GetValue("name") != nameof(ModuleVariableIspThrust)) continue;
+                string configuredEngineId = moduleNode.GetValue("engineID");
+                if (!string.IsNullOrEmpty(engineID) &&
+                    !string.IsNullOrEmpty(configuredEngineId) &&
+                    configuredEngineId != engineID) continue;
+                candidates.Add(moduleNode);
+            }
+
+            if (candidates.Count != 1) return;
+
+            LoadResourceNodeCopies(candidates[0], "INPUT_RESOURCE", inputResourceNodes);
+            LoadResourceNodeCopies(candidates[0], "OUTPUT_RESOURCE", outputResourceNodes);
+        }
+
+        private bool BuildThrottleResources(out string error)
+        {
+            inputResources.Clear();
+            outputResources.Clear();
+            error = string.Empty;
+
+            HashSet<string> resourceNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (ConfigNode node in inputResourceNodes)
+            {
+                ThrottleResource resource;
+                if (!TryParseThrottleResource(node, false, out resource, out error)) return false;
+                if (!resourceNames.Add(resource.ResourceName))
+                {
+                    error = "throttle resource " + resource.ResourceName + " is configured more than once";
+                    return false;
+                }
+                if (!ResolveThrottleResource(resource, out error)) return false;
+                inputResources.Add(resource);
+            }
+
+            foreach (ConfigNode node in outputResourceNodes)
+            {
+                ThrottleResource resource;
+                if (!TryParseThrottleResource(node, true, out resource, out error)) return false;
+                if (!resourceNames.Add(resource.ResourceName))
+                {
+                    error = "throttle resource " + resource.ResourceName +
+                        " cannot be configured more than once or as both input and output";
+                    return false;
+                }
+                if (!ResolveThrottleResource(resource, out error)) return false;
+                outputResources.Add(resource);
+            }
+
+            return true;
+        }
+
+        private static bool TryParseThrottleResource(
+            ConfigNode node,
+            bool isOutput,
+            out ThrottleResource resource,
+            out string error)
+        {
+            resource = new ThrottleResource();
+            error = string.Empty;
+
+            string resourceName = GetNodeValue(node, "name", "ResourceName");
+            if (string.IsNullOrWhiteSpace(resourceName))
+            {
+                error = (isOutput ? "OUTPUT_RESOURCE" : "INPUT_RESOURCE") +
+                    " requires a resource name";
+                return false;
+            }
+
+            string rawRatio = GetNodeValue(node, "ratio", "Ratio");
+            double ratio;
+            if (string.IsNullOrWhiteSpace(rawRatio) ||
+                !double.TryParse(
+                    rawRatio,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out ratio) ||
+                !IsFinite(ratio) || ratio < 0d)
+            {
+                error = (isOutput ? "OUTPUT_RESOURCE" : "INPUT_RESOURCE") + " " +
+                    resourceName + " requires a non-negative ratio in units per second";
+                return false;
+            }
+
+            ResourceFlowMode flowMode = ResourceFlowMode.NULL;
+            string rawFlowMode = GetNodeValue(node, "flowMode", "FlowMode");
+            if (!string.IsNullOrWhiteSpace(rawFlowMode) &&
+                !Enum.TryParse(rawFlowMode.Trim(), true, out flowMode))
+            {
+                error = (isOutput ? "OUTPUT_RESOURCE" : "INPUT_RESOURCE") + " " +
+                    resourceName + " has invalid flowMode " + rawFlowMode;
+                return false;
+            }
+
+            bool dumpExcess = true;
+            string rawDumpExcess = GetNodeValue(node, "dumpExcess", "DumpExcess");
+            if (isOutput && !string.IsNullOrWhiteSpace(rawDumpExcess) &&
+                !bool.TryParse(rawDumpExcess.Trim(), out dumpExcess))
+            {
+                error = "OUTPUT_RESOURCE " + resourceName +
+                    " has invalid dumpExcess value " + rawDumpExcess;
+                return false;
+            }
+
+            resource.ResourceName = resourceName.Trim();
+            resource.Ratio = ratio;
+            resource.FlowMode = flowMode;
+            resource.DumpExcess = dumpExcess;
+            return true;
+        }
+
+        private static string GetNodeValue(ConfigNode node, string preferredName, string alternateName)
+        {
+            string value = node.GetValue(preferredName);
+            return value ?? node.GetValue(alternateName);
+        }
+
+        private static bool ResolveThrottleResource(ThrottleResource resource, out string error)
+        {
+            error = string.Empty;
+            PartResourceDefinition definition =
+                PartResourceLibrary.Instance.GetDefinition(resource.ResourceName);
+            if (definition == null)
+            {
+                error = "could not resolve throttle resource " + resource.ResourceName;
+                return false;
+            }
+
+            resource.ResourceId = definition.id;
+            if (resource.FlowMode == ResourceFlowMode.NULL)
+                resource.FlowMode = definition.resourceFlowMode;
+            return true;
         }
 
         private bool BuildPerformancePoints(out string error)
@@ -470,6 +666,104 @@ namespace ArmorOverhaul
             RefreshEnvironmentDisplay();
         }
 
+        private void ProcessThrottleResources(double throttle, double deltaTime)
+        {
+            double recipeFraction = CalculateInputRecipeFraction(throttle, deltaTime);
+            if (recipeFraction <= ResourceTolerance)
+            {
+                engine.Shutdown();
+                return;
+            }
+
+            double processedFraction = recipeFraction;
+            foreach (ThrottleResource input in inputResources)
+            {
+                double fullAmount = CalculateThrottleResourceAmount(
+                    input.Ratio,
+                    throttle,
+                    deltaTime);
+                if (fullAmount <= ResourceTolerance) continue;
+
+                double requestedAmount = fullAmount * recipeFraction;
+                double consumedAmount = part.RequestResource(
+                    input.ResourceId,
+                    requestedAmount,
+                    input.FlowMode);
+                processedFraction = Math.Min(
+                    processedFraction,
+                    Math.Max(0d, consumedAmount) / fullAmount);
+            }
+
+            bool mustShutdown = processedFraction + ResourceTolerance < 1d;
+            foreach (ThrottleResource output in outputResources)
+            {
+                double outputAmount = CalculateThrottleResourceAmount(
+                    output.Ratio,
+                    throttle,
+                    deltaTime) * processedFraction;
+                if (outputAmount <= ResourceTolerance) continue;
+
+                double transferredAmount = part.RequestResource(
+                    output.ResourceId,
+                    -outputAmount,
+                    output.FlowMode);
+                double storedAmount = Math.Max(0d, -transferredAmount);
+                if (!output.DumpExcess && storedAmount + ResourceTolerance < outputAmount)
+                    mustShutdown = true;
+            }
+
+            if (mustShutdown)
+                engine.Shutdown();
+        }
+
+        private double CalculateInputRecipeFraction(double throttle, double deltaTime)
+        {
+            double recipeFraction = 1d;
+            foreach (ThrottleResource input in inputResources)
+            {
+                double requestedAmount = CalculateThrottleResourceAmount(
+                    input.Ratio,
+                    throttle,
+                    deltaTime);
+                if (requestedAmount <= ResourceTolerance) continue;
+
+                double availableAmount;
+                double maxAmount;
+                part.GetConnectedResourceTotals(
+                    input.ResourceId,
+                    input.FlowMode,
+                    out availableAmount,
+                    out maxAmount,
+                    true);
+                recipeFraction = Math.Min(
+                    recipeFraction,
+                    Math.Max(0d, availableAmount) / requestedAmount);
+            }
+
+            return Math.Max(0d, Math.Min(1d, recipeFraction));
+        }
+
+        private static double CalculateThrottleResourceAmount(
+            double ratio,
+            double throttle,
+            double deltaTime)
+        {
+            if (!IsFinite(ratio) || ratio <= 0d ||
+                !IsFinite(throttle) || throttle <= 0d ||
+                !IsFinite(deltaTime) || deltaTime <= 0d)
+            {
+                return 0d;
+            }
+
+            return ratio * Clamp01(throttle) * deltaTime;
+        }
+
+        private static double Clamp01(double value)
+        {
+            if (!IsFinite(value)) return 0d;
+            return Math.Max(0d, Math.Min(1d, value));
+        }
+
         private void RefreshEnvironmentDisplay()
         {
             if (engine == null || engine.atmosphereCurve == null || part == null) return;
@@ -650,6 +944,11 @@ namespace ArmorOverhaul
         private static bool IsFinite(float value)
         {
             return !float.IsNaN(value) && !float.IsInfinity(value);
+        }
+
+        private static bool IsFinite(double value)
+        {
+            return !double.IsNaN(value) && !double.IsInfinity(value);
         }
 
         private static bool IsFinitePositive(float value)

@@ -123,6 +123,21 @@ MODULE
     scaleMinThrust = true
     thrustInterpolation = linear // linear or constantPower
 
+    INPUT_RESOURCE
+    {
+        name = ArcElement
+        ratio = 0.00002296296
+        flowMode = NO_FLOW
+    }
+
+    OUTPUT_RESOURCE
+    {
+        name = LqdHelium
+        ratio = 0.00009589698
+        flowMode = NO_FLOW
+        dumpExcess = true
+    }
+
     PERFORMANCE_POINT
     {
         percent = 0
@@ -148,6 +163,22 @@ MODULE
     }
 }
 ```
+
+`INPUT_RESOURCE` and `OUTPUT_RESOURCE` are optional and may each appear any
+number of times. Their `ratio` is an absolute resource rate in units per
+second at 100 percent engine throttle; it is independent of propellant mass
+flow, ISP, and the performance slider. The actual rate is
+`ratio * currentThrottle`, integrated over physics time. `flowMode` is
+optional and otherwise uses the resource definition's default flow mode.
+
+All inputs form one recipe. When an input is short, the module processes the
+available fraction for the final physics tick and shuts the engine down.
+Outputs default to `dumpExcess = true`, so unavailable storage does not
+throttle or stop the engine. Set `dumpExcess = false` when a full output must
+shut the engine down. These resources are processed only in flight while the
+target engine is ignited and operational. Use this mechanism, rather than an
+engine `PROPELLANT` with `ignoreForIsp`, for fixed companion rates such as
+reactor consumables and byproducts.
 
 At least the 0 and 100 percent points are required. Intermediate points are
 optional. All explicitly supplied `atmosphereCurve` nodes must use identical
