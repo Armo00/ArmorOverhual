@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- KSP scans every DLL below GameData, including normal obj folders. -->
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\..\..\..\BuildArtifacts\fixKRPC\obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>
