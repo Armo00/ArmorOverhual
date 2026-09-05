@@ -143,7 +143,7 @@ Assert-True (-not ($sourceText -match 'WaitForSeconds|StartCoroutine|realtimeSin
 
 $cfg = Get-Content -LiteralPath $phoenixReactor -Raw -Encoding UTF8
 $firstLine = Get-Content -LiteralPath $phoenixReactor -Encoding UTF8 -TotalCount 1
-Assert-True ($firstLine -eq '// Modified 2026-08-20') 'Phoenix Arc Reactor modification date is incorrect.'
+Assert-True ($firstLine -eq '// Modified 2026-09-06') 'Phoenix Arc Reactor modification date is incorrect.'
 Assert-True ($cfg.Contains('@name = phoenixreactor-0625')) 'phoenixreactor-0625 clone is missing.'
 Assert-True ($cfg.Contains('name = ModuleArcReactor')) 'phoenixreactor-0625 does not use ModuleArcReactor.'
 Assert-True (-not $cfg.Contains('name = ModuleResourceConverter')) 'Legacy ModuleResourceConverter remains on phoenixreactor-0625.'
@@ -163,7 +163,7 @@ Assert-True (-not ($cfg -match 'DumpExcess\s*=')) 'phoenixreactor-0625 still use
 
 $reactorVariants = @(
     @{ Id = 'phoenixreactor-0625'; Mass = 0.04; Power = 3000000; Fuel = 100; EntryCost = 3000000 },
-    @{ Id = 'phoenixreactor-125'; Mass = 0.32; Power = 24000000; Fuel = 800; EntryCost = 3150000 },
+    @{ Id = 'phoenixreactor-125-v2'; Mass = 0.32; Power = 24000000; Fuel = 800; EntryCost = 3150000 },
     @{ Id = 'phoenixreactor-1875'; Mass = 1.08; Power = 81000000; Fuel = 2700; EntryCost = 3300000 },
     @{ Id = 'phoenixreactor-250'; Mass = 2.56; Power = 192000000; Fuel = 6400; EntryCost = 3600000 },
     @{ Id = 'phoenixreactor-375'; Mass = 8.64; Power = 648000000; Fuel = 21600; EntryCost = 4050000 },

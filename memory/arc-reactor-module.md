@@ -69,7 +69,7 @@ This preserves power density and approximately 50.4 days of full-power runtime.
 | Part | Diameter | Volume factor | Dry mass | Power | Entry cost |
 |---|---:|---:|---:|---:|---:|
 | phoenixreactor-0625 | 0.625 m | 1 | 0.04 t | 10.8 GW | 3,000,000 |
-| phoenixreactor-125 | 1.25 m | 8 | 0.32 t | 86.4 GW | 3,150,000 |
+| phoenixreactor-125-v2 | 1.25 m | 8 | 0.32 t | 86.4 GW | 3,150,000 |
 | phoenixreactor-1875 | 1.875 m | 27 | 1.08 t | 291.6 GW | 3,300,000 |
 | phoenixreactor-250 | 2.5 m | 64 | 2.56 t | 691.2 GW | 3,600,000 |
 | phoenixreactor-375 | 3.75 m | 216 | 8.64 t | 2.3328 TW | 4,050,000 |
