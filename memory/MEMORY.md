@@ -13,3 +13,4 @@
 - [Greenhouse Rules](greenhouse-rules.md) — power 12-20 kW/person, scale economy, EC Ratio = kW/3.6 (2026-06-20)
 - [Variable ISP Throttle Resources](variable-isp-throttle-resources.md) — ModuleVariableIspThrust absolute U/s input/output resource rules and LA-151 integration (2026-08-20)
 - [Robotics / KJR Compatibility](robotics-kjr-compat.md) — vessel-wide Auto Strut suspension, Servo manager window, working control paths, and deferred PAW lock-sync issue (2026-08-23)
+- [KSPCF FastLoader MU Texture Slots](kspcf-fastloader-mu-texture-slots.md) — declaring more textures than materials reference makes FastLoader drop the whole model; .mu writer must keep texCount == referenced slot count (2026-09-20)
