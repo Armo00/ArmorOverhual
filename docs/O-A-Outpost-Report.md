@@ -167,7 +167,7 @@
 
 **2 个 Science Lab**（每个）：
 - 质量: 14.2 吨
-- scienceCap=120,000, scienceMultiplier=12, researchTime=6.8
+- scienceCap=120,000, scienceMultiplier=12, researchTime=7
 - dataStorage=12,000
 
 **2 个 Greenhouse**（每个）：

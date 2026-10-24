@@ -5,6 +5,9 @@ KSP 半真实化 overhaul 项目。对 50+ 个 mod 的零件参数进行面向�
 
 ## 核心原则
 
+- 燃料箱容量必须离线确定后按零件单独写入固定数值；禁止在补丁中通过资源量引用、乘加运算等方式批量现场计算容量。本轮修正范围为 BDB；已有其他 mod 的类似问题不自动扩展处理。
+- Mod 参数补丁按 Part 的主体类型组织，参考 `Mods/NF-Spacecraft`：例如 `CommandPod.cfg`、`FuelTank.cfg`、`Engines.cfg`、`RCS.cfg`。同类零件的尺寸、RF、内置 RCS 等调整集中在所属类型文件，不按适配阶段编号散落。VABO、RemoteTech 等已有统一管理目录继续遵循项目约定。
+- BDB 零件移除：将对应文件移动到 `GameData/Bluedog_DB/delete`，由用户手动删除；不执行删除命令，也不使用 AO 的 `!PART` 补丁代替文件移除。移入文件追加 `.disabled` 后缀以避免 GameData 扫描继续加载，保留相对路径，检查共享资源依赖。
 - 参数配置优先：优先通过调整 cfg 参数来补缺口。模型文件（.mu）一般不修改
 - 数据驱动：引擎参数的调整需要同步记录到 Engine Database 电子表格。也可先在电子表格中做规划，再反写到 cfg
 - 不覆盖现有定位：新 mod 入库时，先检查工作区已有的同类零件分布，避免重复定位
@@ -188,6 +191,7 @@ RemoteTech 用以下四个模块替代原版通讯系统：
 
 ### VABOrganizer
 
+- 分类必须按每个零件的主要用途或明确设计定位逐项适配；同类零件可用 `|` 连接精确 PART 名称。禁止使用通配符或 `:HAS` 模块/资源/属性条件批量推断分类。多功能零件以主体用途为准，不能因附带 RCS、控制核心、燃料或分离发动机而覆盖主体分类。
 - 自定义子分类和 bulkhead 定义在 `Mods/VABO/a_general_settings.cfg` 和 `GlobalSettings/VABO.cfg`
 - `ORGANIZERSUBCATEGORY` 定义子分类，`ORGANIZERBULKHEAD` 定义 bulkhead
 - 分类补丁模板：
