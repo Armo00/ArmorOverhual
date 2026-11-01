@@ -6,3 +6,6 @@ Plugins/*.pdb
 Plugins/PluginData/
 techtree_design/
 .env
+__pycache__/
+*.pyc
+*.inspect.ndjson

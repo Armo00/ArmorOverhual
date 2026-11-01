@@ -1,0 +1,53 @@
+EditorSearchOptimizer 0.1.0 - experimental
+
+Purpose
+  Keep the editor responsive while creating a cold search result's part icons.
+  Search matching, exclusion filters, sorting, part config and saved vessels are unchanged.
+  Existing patched EditorPartIcon.Create / EditorPartList.UpdatePartIcon hooks still run.
+
+Behavior
+  Only the PartSearch state is batched. Normal categories, custom categories,
+  subassemblies and variants retain their normal path.
+  Up to 24 icons or approximately 5 ms of icon CPU work per frame. Results
+  appear progressively without truncation. A single icon, filtering/sorting,
+  clearing old results, end-of-frame canvas work or final layout can exceed
+  the budget; this is not a hard frame-time guarantee.
+  A new input, refresh, mode change or scene exit invalidates old batches.
+  Clicking an empty search field does not search the entire catalog.
+  If batching fails, the stock icon builder is attempted and an error is logged.
+
+Install / remove
+  GameData/zzzArmorOverhual/Plugins/EditorSearchOptimizer.dll
+  Restart KSP after installing or removing; returning to VAB alone cannot load it.
+  Removal needs only this DLL, not any vessel or save changes.
+
+Validation status
+  Build and offline API/batch/cancellation checks pass.
+  2026-11-01: user reports no issues in initial in-game testing. KSP.log confirms
+  successful initialization, completed batches and cancellation of stale searches.
+  One cold result: 131 matches, 44 new icons, 18 batches, 103.4 ms icon CPU,
+  44.2 ms final layout and 591.1 ms wall time (including yielded frames).
+  This is still experimental: a controlled A/B comparison and the complete
+  mode/scene regression matrix below have not been completed.
+
+Reproduction after restart
+  Enter VAB. Click empty search: existing category should remain visible.
+  Type m: full matches should appear progressively while camera/UI stays usable.
+  Immediately change to mk4b: no old m batch should keep adding icons.
+  Clear search / change category / open variants / leave VAB during a large
+  search: normal UI should resume and stale batches should stop.
+  Compare cold and repeated search with the same craft and word.
+  Check KSP.log for [EditorSearchOptimizer].
+
+Logs
+  enabled: startup patch installation succeeded.
+  filter/sort/dispatch: synchronous RefreshSearchList duration and match count.
+  complete: result count, new icon count, batches, iconCPU, maxIcon,
+            finalLayout and total wall time. Wall time includes yielded frames.
+  cancelled: a newer request superseded a running batch (expected).
+  Errors / stock fallback: diagnostic failure; do not count as a successful fix.
+
+Offline checks
+  dotnet build GameData/zzzArmorOverhual/Source/EditorSearchOptimizer -c Release
+  powershell -NoProfile -File GameData/zzzArmorOverhual/tests/EditorSearchOptimizer.Tests.ps1
+  Build intermediates stay in BuildArtifacts, outside GameData.
