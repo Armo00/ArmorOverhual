@@ -1,0 +1,50 @@
+Merged BDB UA120 / RSMP compatibility
+
+Scope
+  Mods/Bluedog_DB/zz_UA120_RSMP.cfg patches only bluedog_UA120.
+  Requires Bluedog_DB, RSMP and Waterfall. SmokeScreen is optional for smoke.
+  RSMP's original files and the old separate numbered UA120 PARTs are unchanged.
+
+Cause
+  RSMP's UA120X.cfg targets the old UA1202..UA1208 PART names. Its titan fix.cfg
+  also targets the merged UA120, leaving an Inline B9 modifier pointing at the
+  nonexistent UA120XFX module. The old body models also contain redundant
+  thrustTransform nodes; the merged part uses the shared UA120Transforms model.
+
+Changes
+  UA120XFX uses RSMP srb-waterfall and lemon-SRB-core on thrustTransform2.
+  Main throttle and burnout controllers explicitly select engineID S1SRB.
+  AOUA120AbortFX uses lemon-SRB-core on both shared fxAbortTransform2 vents,
+  gated by S1SRB_Abort. It does not use the single central abort thrust vector.
+  Both Radial and Inline explicitly replace the two main plume templates;
+  the BDB transform rotation and length/position selectors remain intact.
+  Main and abort sound/smoke have separate powerEffectNames. RF configurations
+  retain the main effect binding when changing any of the eight motor variants.
+  RSMP's smoke-only katniss template is generated after zRealPlume and copied
+  to the two engine effect groups. Old stock/RealPlume flames are removed.
+  RSMP burnout afterglow remains on the main nozzle, including after an abort;
+  this is independent of the active, throttle-driven main flame.
+
+Validation
+  Run from the KSP root:
+    powershell -NoProfile -File GameData/zzzArmorOverhual/tests/UA120RSMP.Tests.ps1
+  Uses the installed ModuleManager 4.2.3 ModifyNode implementation on the current
+  ConfigCache UA120. Applies the prepare, installed RSMP smoke generator and
+  final compatibility patches in order; does not overwrite ConfigCache.
+  Checks resolved B9 references, engine/controller IDs, transforms, smoke,
+  removed legacy effects and unchanged model/resource/performance/MEC data.
+  This is an offline test of the relevant passes, not a full KSP startup.
+
+Runtime acceptance (pending)
+  Restart KSP to load the patch. Returning to VAB alone is insufficient.
+  Confirm the UA120 Inline B9 serious warning is absent and inspect KSP.log
+  for UA120XFX, AOUA120AbortFX, missing transforms/templates and MM warnings.
+  In VAB cycle UA1202, 3, 4, 5, 6, 6F, 7, 8; test Radial -> Inline -> Radial.
+  In flight check ignition, gimbal movement, burnout and Abort: main flame
+  stops and both top vents light with separately controlled smoke/sound.
+  Main offsets/scales are inherited from RSMP; abort scales are initial values.
+  Exact plume alignment, brightness and size still need visual verification.
+
+Rollback
+  Remove only Mods/Bluedog_DB/zz_UA120_RSMP.cfg and restart. This restores the
+  pre-fix behavior, including RSMP's dangling Inline reference. No DLL is added.
